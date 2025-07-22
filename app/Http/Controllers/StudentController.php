@@ -30,6 +30,7 @@ class StudentController extends Controller
             'telefone' => 'nullable|string|max:20',
             'curso' => 'nullable|string|max:100',
             'inst_ensino' => 'nullable|string|max:150',
+            'nomeUsuario' => 'required|string|max:100',
             'senha' => 'required|string|min:6|max:255',
         ]);
 
@@ -59,6 +60,7 @@ class StudentController extends Controller
             'telefone' => 'nullable|string|max:20',
             'curso' => 'nullable|string|max:100',
             'inst_ensino' => 'nullable|string|max:150',
+            'nomeUsuario' => 'required|string|max:100',
             'senha' => 'nullable|string|min:6|max:255',
         ]);
 

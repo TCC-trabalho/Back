@@ -28,6 +28,7 @@ class OrientadorController extends Controller
             'email' => 'required|email|max:150|unique:orientador,email',
             'telefone' => 'nullable|string|max:20',
             'formacao' => 'nullable|string|max:100',
+            'nomeUsuario' => 'required|string|max:100',
             'senha' => 'required|string|min:6|max:255',
         ]);
 
@@ -54,6 +55,7 @@ class OrientadorController extends Controller
             'email' => "sometimes|required|email|max:150|unique:orientador,email,{$id},id_orientador",
             'telefone' => 'nullable|string|max:20',
             'formacao' => 'nullable|string|max:100',
+            'nomeUsuario' => 'required|string|max:100',
             'senha' => 'nullable|string|min:6|max:255',
         ]);
 

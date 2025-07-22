@@ -4,54 +4,35 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
+use App\Models\Student as Aluno;
+use App\Models\Orientador;
+use App\Models\Company;
 
 class AuthController extends Controller
 {
-    /**
-     * POST /api/v1/login
-     * Corpo: email + senha
-     * Consulta nas tabelas: aluno, empresa e orientador
-     */
     public function login(Request $request)
     {
-        $data = $request->validate([
-            'email' => 'required|email',
-            'senha' => 'required|string'
-        ]);
+        $tipo = $request->input('tipo');
+        $senha = $request->input('senha');
 
-        // Tenta autenticar como Aluno
-        $aluno = DB::table('aluno')->where('email', $data['email'])->first();
-        if ($aluno && Hash::check($data['senha'], $aluno->senha)) {
-            return response()->json([
-                'message' => 'Login realizado com sucesso (Aluno)',
-                'tipo' => 'aluno',
-                'user' => $aluno
-            ]);
+        if ($tipo === 'aluno') {
+            $user = Aluno::where('email', $request->input('email'))->first();
+        } elseif ($tipo === 'orientador') {
+            $user = Orientador::where('email', $request->input('email'))->first();
+        } elseif ($tipo === 'empresa') {
+            $user = Company::where('cnpj', $request->input('cnpj'))->first();
+        } else {
+            return response()->json(['message' => 'Tipo de usuário inválido'], 400);
         }
 
-        // Tenta autenticar como Orientador
-        $orientador = DB::table('orientador')->where('email', $data['email'])->first();
-        if ($orientador && Hash::check($data['senha'], $orientador->senha)) {
-            return response()->json([
-                'message' => 'Login realizado com sucesso (Orientador)',
-                'tipo' => 'orientador',
-                'user' => $orientador
-            ]);
-        }
-
-        // Tenta autenticar como Empresa
-        $empresa = DB::table('empresa')->where('email', $data['email'])->first();
-        if ($empresa && Hash::check($data['senha'], $empresa->senha)) {
-            return response()->json([
-                'message' => 'Login realizado com sucesso (Empresa)',
-                'tipo' => 'empresa',
-                'user' => $empresa
-            ]);
+        if (!$user || !isset($user->senha) || !Hash::check($senha, $user->senha)) {
+            return response()->json(['message' => 'Credenciais inválidas'], 401);
         }
 
         return response()->json([
-            'message' => 'Credenciais inválidas'
-        ], 401);
+            'message' => 'Login realizado com sucesso',
+            'user' => $user,
+            'tipo' => $tipo
+        ]);
     }
 }

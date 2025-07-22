@@ -22,6 +22,7 @@ class Student extends Model
         'telefone',
         'curso',
         'inst_ensino',
+        'nomeUsuario',
         'senha',
     ];
 

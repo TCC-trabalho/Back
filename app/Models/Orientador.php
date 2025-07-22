@@ -20,6 +20,7 @@ class Orientador extends Model
         'email',
         'telefone',
         'formacao',
+        'nomeUsuario',
         'senha',
     ];
 
