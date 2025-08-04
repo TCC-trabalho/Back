@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Group;
+use App\Models\Student;
 
 class GroupController extends Controller
 {
@@ -63,6 +65,47 @@ class GroupController extends Controller
 
         $group->delete();
         return response()->json(null, 204);
+    }
+
+    public function adicionarIntegrantes(Request $request, $id)
+    {
+        // Validação básica
+        $request->validate([
+            'emails' => 'required|array|min:1',
+            'emails.*' => 'required|email',
+        ]);
+
+        $grupoId = $id;
+        $emails = $request->input('emails');
+
+        // Recupera os alunos pelos e-mails
+        $alunos = Student::whereIn('email', $emails)->get();
+
+        // Verifica se encontrou todos os e-mails
+        if (count($alunos) === 0) {
+            return response()->json([
+                'message' => 'Nenhum aluno encontrado com os e-mails fornecidos.',
+            ], 404);
+        }
+
+        foreach ($alunos as $aluno) {
+            DB::table('aluno_grupo')->updateOrInsert(
+                [
+                    'id_aluno' => $aluno->id_aluno,
+                    'id_grupo' => $grupoId
+                ],
+                [
+                    'data_ingresso' => now()->toDateString()
+                ]
+            );
+        }
+
+        return response()->json([
+            'message' => 'Integrantes adicionados com sucesso.',
+            'grupo_id' => $grupoId,
+            'ids_alunos' => $alunos->pluck('id_aluno'),
+            'emails_adicionados' => $alunos->pluck('email'),
+        ]);
     }
 
 }

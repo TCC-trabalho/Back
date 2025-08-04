@@ -35,6 +35,7 @@ Route::prefix('v1')->group(function () {
     Route::post('orientadores', [OrientadorController::class, 'store']);
     Route::post('alunos', [StudentController::class, 'store']);
     Route::post('grupos', [GroupController::class, 'store']);
+    Route::post('/grupo/{id}/adicionar-integrantes', [GroupController::class, 'adicionarIntegrantes']);
     Route::post('empresas', [CompanyController::class, 'store']);
     Route::post('empresas/{empresa}/avaliacoes', [CompanyReviewController::class, 'store']);
 
