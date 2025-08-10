@@ -67,6 +67,9 @@ class GroupController extends Controller
         return response()->json(null, 204);
     }
 
+    /**
+     * POST /api/v1//grupo/{id}/adicionar-integrantes
+     */
     public function adicionarIntegrantes(Request $request, $id)
     {
         // Validação básica

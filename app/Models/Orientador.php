@@ -22,6 +22,7 @@ class Orientador extends Model
         'formacao',
         'nomeUsuario',
         'senha',
+        'qtn_projetos',
     ];
 
     public function projects()

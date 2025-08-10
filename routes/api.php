@@ -23,6 +23,9 @@ Route::prefix('v1')->group(function () {
     Route::get('projetos', [ProjectController::class, 'index']);
     Route::get('projetos/{id}', [ProjectController::class, 'show']);
     Route::get('projetos/area/{area}', [ProjectController::class, 'getByArea']);
+    Route::get('/projetos/aluno/{id_aluno}', [ProjectController::class, 'listarPorAluno']);
+    Route::get('/projetos/orientador/{id_orientador}', [ProjectController::class, 'listarPorOrientador']);
+    Route::get('/projetos/grupo/{id_grupo}', [ProjectController::class, 'listarPorGrupo']);
 
     Route::get('grupos', [GroupController::class, 'index']);
     Route::get('alunos', [StudentController::class, 'index']);

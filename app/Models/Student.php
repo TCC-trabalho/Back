@@ -24,6 +24,7 @@ class Student extends Model
         'inst_ensino',
         'nomeUsuario',
         'senha',
+        'qtn_projetos',
     ];
 
     public function groups()
