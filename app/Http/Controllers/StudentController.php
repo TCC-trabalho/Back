@@ -23,6 +23,7 @@ class StudentController extends Controller
     {
         $data = $request->validate([
             'nome' => 'required|string|max:100',
+            'biografia' => 'nullable|string',
             'cpf' => 'required|digits:11|unique:aluno,cpf',
             'rg' => 'nullable|string|max:20|unique:aluno,rg',
             'email' => 'required|email|max:150|unique:aluno,email',
@@ -53,6 +54,7 @@ class StudentController extends Controller
 
         $data = $request->validate([
             'nome' => 'sometimes|required|string|max:100',
+            'biografia' => 'nullable|string',
             'cpf' => "sometimes|required|digits:11|unique:aluno,cpf,{$id},id_aluno",
             'rg' => "nullable|string|max:20|unique:aluno,rg,{$id},id_aluno",
             'email' => "sometimes|required|email|max:150|unique:aluno,email,{$id},id_aluno",
