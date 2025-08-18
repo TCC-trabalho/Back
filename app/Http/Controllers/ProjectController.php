@@ -167,15 +167,11 @@ class ProjectController extends Controller
 
         $data = $request->validate([
             'titulo' => 'sometimes|required|string|max:150',
-            'descricao' => 'nullable|string',
             'area' => 'nullable|string|max:50',
-            'data_criacao' => 'nullable|date',
             'status' => 'nullable|in:ativo,inativo',
+            'descricao' => 'nullable|string',
             'objetivo' => 'nullable|string',
             'justificativa' => 'nullable|string',
-            'senha_acesso' => 'nullable|string|max:255',
-            'id_grupo' => 'sometimes|required|integer|exists:grupo,id_grupo',
-            'id_orientador' => 'sometimes|required|integer|exists:orientador,id_orientador',
         ]);
 
         $project->update($data);
