@@ -46,10 +46,10 @@ Route::prefix('v1')->group(function () {
     // — PUT —
     //
     Route::put('projetos/{id}', [ProjectController::class, 'update']);
-    Route::put('orientadores/{id}', [OrientadorController::class, 'update']);
-    Route::put('alunos/{id}', [StudentController::class, 'update']);
+    Route::put('orientador/{id}', [OrientadorController::class, 'update']);
+    Route::put('aluno/{id}', [StudentController::class, 'update']);
     Route::put('grupos/{id}', [GroupController::class, 'update']);
-    Route::put('empresas/{id}', [CompanyController::class, 'update']);
+    Route::put('empresa/{id}', [CompanyController::class, 'update']);
     Route::put('empresas/{empresa}/avaliacoes/{avaliacao}', [CompanyReviewController::class, 'update']);
 
     //

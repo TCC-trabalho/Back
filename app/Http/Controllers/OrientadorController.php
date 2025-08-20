@@ -52,9 +52,6 @@ class OrientadorController extends Controller
         $data = $request->validate([
             'nome' => 'sometimes|required|string|max:100',
             'biografia' => 'nullable|string',
-            'cpf' => "sometimes|required|digits:11|unique:orientador,cpf,{$id},id_orientador",
-            'rg' => "nullable|string|max:20|unique:orientador,rg,{$id},id_orientador",
-            'email' => "sometimes|required|email|max:150|unique:orientador,email,{$id},id_orientador",
             'telefone' => 'nullable|string|max:20',
             'formacao' => 'nullable|string|max:100',
             'nomeUsuario' => 'required|string|max:100',
