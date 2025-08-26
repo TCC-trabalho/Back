@@ -18,6 +18,19 @@ class ProjectController extends Controller
         return response()->json($projects);
     }
 
+    public function projetoControlado(Request $request)
+    {
+        $limit = $request->query('limit');
+
+        if ($limit) {
+            $projects = Project::limit($limit)->get();
+        } else {
+            $projects = Project::all();
+        }
+
+        return response()->json($projects);
+    }
+
     /**
      * GET /api/v1/projetos/{id}
      */

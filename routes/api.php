@@ -21,6 +21,7 @@ Route::prefix('v1')->group(function () {
     // — GET —
     //
     Route::get('projetos', [ProjectController::class, 'index']);
+    Route::get('projetos-controlados', [ProjectController::class, 'projetoControlado']);
     Route::get('projetos/{id}', [ProjectController::class, 'show']);
     Route::get('projetos/area/{area}', [ProjectController::class, 'getByArea']);
     Route::get('/projetos/aluno/{id_aluno}', [ProjectController::class, 'listarPorAluno']);
