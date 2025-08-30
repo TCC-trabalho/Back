@@ -14,6 +14,7 @@ class Project extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'foto',
         'titulo',
         'descricao',
         'area',
@@ -21,7 +22,6 @@ class Project extends Model
         'status',
         'objetivo',
         'justificativa',
-        'senha_acesso',
         'id_grupo',
         'id_orientador',
         'qnt_empresas_patrocinam',

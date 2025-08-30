@@ -65,7 +65,6 @@ class ProjectController extends Controller
             'data_criacao' => $projeto->data_criacao,
             'objetivo' => $projeto->objetivo,
             'justificativa' => $projeto->justificativa,
-            'senha_acesso' => $projeto->senha_acesso,
             'id_grupo' => $projeto->id_grupo,
             // bloco do grupo + integrantes
             'grupo' => [
@@ -152,6 +151,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
+            'foto' => 'nullable|string|max:255',
             'titulo' => 'required|string|max:150',
             'descricao' => 'nullable|string',
             'area' => 'nullable|string|max:50',
@@ -159,7 +159,6 @@ class ProjectController extends Controller
             'status' => 'nullable|in:ativo,inativo',
             'objetivo' => 'nullable|string',
             'justificativa' => 'nullable|string',
-            'senha_acesso' => 'nullable|string|max:255',
             'id_grupo' => 'required|integer|exists:grupo,id_grupo',
             'id_orientador' => 'required|integer|exists:orientador,id_orientador',
         ]);
